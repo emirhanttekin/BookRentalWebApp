@@ -1,0 +1,68 @@
+﻿@using WebApplication2.Entity
+@model List<WebApplication2.Entity.Hire>
+
+@if (TempData["SUCCESSFUL"] != null)  //Bi kere çalışır null
+{
+    <h2 style="color:red">@TempData["SUCCESSFUL"]</h2>
+}
+
+<!--bootswatch.com/pulse/-->
+<div class="container">
+    <div>
+        <div class="row pt-3 pb-4">
+            <!-- tabloyla arada 4 boşluk bırakır -->
+            <div>
+                <h1>Kitap Kiralamaları</h1>
+            </div>
+        </div>
+    </div>
+
+
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>StudentId</th>
+                <th>BookId</th> 
+                <th></th>
+                <th></th>  <!--Sütun açıyor-->
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var hire in Model)
+            {
+
+                <tr>
+                    <td>@hire.Id</td>
+                    <td>@hire.StudentId</td>
+                    <td>@hire.Book.BookName</td>
+            
+              
+                    <td>
+                        <a onclick="newPage" asp-controller="Hire" asp-action="AddUpdate" asp-route-id="@hire.Id" type="button" class="btn btn-success" style="width:150px">Güncelle</a>
+                    </td> <!--hücre-->
+                    <td>
+                        <form method="post" asp-action="DeletePost" asp-route-id="@hire.Id">
+                            <button type="submit" class="btn btn-danger" style="width:150px">Sil</button>
+                        </form>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+
+    </table>
+    <div class="row pt-3 pb-2">
+        <!--boyutu 3 olsun yazının boşlukta 2 olsun-->
+        <div>
+            <a asp-controller="Hire" asp-action="AddUpdate" class="btn btn-lg btn-primary" type="button">
+                <!--Hangi Kontrollerin içine gidicem hangi actionu çalıştırıcam-->
+                Yeni Kiralama Kaydı Oluştur
+            </a>
+        </div>
+    </div>
+
+
+</div>

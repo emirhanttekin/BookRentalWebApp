@@ -1,0 +1,70 @@
+﻿@model List<WebApplication2.Entity.Book>
+
+@if (TempData["SUCCESSFUL"] != null)  //Bi kere çalışır null
+{
+    <h2 style="color:red">@TempData["SUCCESSFUL"]</h2>
+}
+
+<!--bootswatch.com/pulse/-->
+<div class="container">
+    <div>
+        <div class="row pt-3 pb-4">
+            <!-- tabloyla arada 4 boşluk bırakır -->
+            <div>
+                <h1>Kitaplar</h1>
+            </div>
+        </div>
+    </div>
+
+
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>BookName</th>
+                <th>Definition</th>
+                <th>Writer</th>
+                <th>Price</th>
+                <th>TypeOfBook</th>
+                <th></th>  <!--Sütun açıyor-->
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var book in Model)
+            {
+
+                <tr>
+                    <td>@book.Id</td>
+                    <td>@book.BookName</td>
+                    <td>@book.Definition</td>
+                    <td>@book.Writer</td>
+                    <td>@book.Price</td>
+                    <td>@book.TypeOfBook.Name</td>
+                    <td>
+                        <a onclick="newPage" asp-controller="Book" asp-action="AddUpdate" asp-route-id="@book.Id" type="button" class="btn btn-success" style="width:150px">Güncelle</a>
+                    </td> <!--hücre-->
+                    <td>
+                        <form method="post" asp-action="DeletePost" asp-route-id="@book.Id">
+                            <button type="submit" class="btn btn-danger" style="width:150px">Sil</button>
+                        </form>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+
+    </table>
+    <div class="row pt-3 pb-2">
+        <!--boyutu 3 olsun yazının boşlukta 2 olsun-->
+        <div>
+            <a asp-controller="Book" asp-action="AddUpdate" class="btn btn-lg btn-primary" type="button">
+                <!--Hangi Kontrollerin içine gidicem hangi actionu çalıştırıcam-->
+                Yeni Kitap Oluştur
+            </a>
+        </div>
+    </div>
+
+
+</div>

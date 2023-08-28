@@ -1,0 +1,85 @@
+﻿@model WebApplication2.Entity.Book
+
+<form method="post" enctype="multipart/form-data">
+    <input asp-for="ImageUrl" hidden /><!--gözükmesin-->
+    <div class="row">
+        <div class="col-10">
+
+            <div class="border p-3 mt-5">
+                <div class="row pb-3">
+
+                    <h2 class="text-primary">@(Model == null ? "Kitap Ekle" : "Kitap Güncelle")</h2>
+                    <hr/>
+
+                </div>
+                <div class="mb-3">
+                    <label asp-for="BookName"></label>
+                    <input asp-for="BookName" class="form-control"/>
+                    <span asp-validation-for="BookName" class="text-danger"></span>
+
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="TypeOfBookId"></label>
+                    <select asp-for="TypeOfBookId" asp-items="ViewBag.TypeOfBookList" class="form-select">
+                    </select>
+                    <span asp-validation-for="TypeOfBookId" class="text-danger"></span>
+
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Definition"></label>
+                    <input asp-for="Definition" class="form-control"/>
+                    <span asp-validation-for="Definition" class="text-danger"></span>
+
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Writer"></label>
+                    <input asp-for="Writer" class="form-control"/>
+                    <span asp-validation-for="Writer" class="text-danger"></span>
+
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Price"></label>
+                    <input asp-for="Price" class="form-control"/>
+                    <span asp-validation-for="Price" class="text-danger"></span>
+
+                </div>
+                <div class="mb-3">
+                    <label asp-for="ImageUrl"></label>
+                    <input type="file" name="file" class="form-control"/>
+
+
+                </div>
+                @if (Model != null)
+                {
+                    <button type="submit" class="btn btn-lg btn-primary" style="width:250px"> Güncelle</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-lg btn-primary" style="width:250px">Kitap Ekle</button>
+                }
+
+                <a asp-controller="Book" asp-action="Index" class="btn btn-lg btn-primary">
+                    Kitaplara Geri Dön
+                </a>
+            </div>
+        </div>
+        @if (Model != null)
+        {
+            <div class="col-2"><img src="@Model.ImageUrl" width="100%" style="border-radius:7px ; 
+                    border:1px solid #bbb9b9" alt=""/>
+            </div>
+        }
+
+    </div>
+
+
+
+</form>
+ <!-- bu scripts required  gömüyor backend kısmında controller kısmında yaptığım için  bunu kaldırdım -->
+@*@section Scripts {
+@{
+  <partial name="_ValidationScriptsPartial"/>  
+}
+}*@

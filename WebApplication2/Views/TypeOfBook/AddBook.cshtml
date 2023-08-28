@@ -1,0 +1,30 @@
+﻿@model WebApplication2.Entity.TypeOfBook
+
+<form method="post">
+    <div class="border p-3 mt-5">
+        <div class="row pb-3">
+            <h2 class="text-primary">Kitap Türü Ekle</h2>
+            <hr/>
+
+        </div>
+        <div class="mb-3">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control"/>
+            <span asp-validation-for="Name" class="text-danger"></span>
+
+        </div>
+
+        <button  type="submit" class="btn btn-lg btn-primary" style="width:250px">KİTAP TÜRÜ EKLE</button>
+        <a asp-controller="TypeOfBook" asp-action="Index" class="btn btn-lg btn-primary">
+            Kitap Türlerine Geri Dön
+        </a>
+
+    </div>
+
+</form>
+ <!-- bu scripts required  gömüyor backend kısmında controller kısmında yaptığım için  bunu kaldırdım -->
+@*@section Scripts {
+@{
+  <partial name="_ValidationScriptsPartial"/>  
+}
+}*@
